@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QHeaderView
 
+import sys
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.cat_list = []
@@ -136,3 +138,11 @@ class Ui_MainWindow(object):
         self.total_line_edit.setText(_translate("MainWindow", "0.00"))
         self.total_label.setText(_translate("MainWindow", "TOTAL"))
         self.exit_button.setText(_translate("MainWindow", "Exit"))
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())

@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QHeaderView
 
 import sys
 
+import model_window as mw
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -142,6 +143,9 @@ class Ui_MainWindow(object):
         self.total_line_edit.setText(_translate("MainWindow", "0.00"))
         self.total_label.setText(_translate("MainWindow", "TOTAL"))
         self.exit_button.setText(_translate("MainWindow", "Exit"))
+        
+        
+        
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

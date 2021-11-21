@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>model_dropdown</class>
- <widget class="QWidget" name="model_dropdown">
+ <class>model_window</class>
+ <widget class="QWidget" name="model_window">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,7 +29,7 @@
     </size>
    </property>
   </widget>
-  <widget class="QComboBox" name="models_dropdown">
+  <widget class="QComboBox" name="model_dropdown">
    <property name="geometry">
     <rect>
      <x>480</x>

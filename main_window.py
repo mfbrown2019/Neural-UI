@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import model_window as mw
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -262,6 +262,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        
+        self.model_button.clicked.connect(self.open_model_window)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -271,6 +273,12 @@ class Ui_MainWindow(object):
         self.settings_button.setText(_translate("MainWindow", "Settings"))
         self.pushButton_5.setText(_translate("MainWindow", "PushButton"))
         self.history_button.setText(_translate("MainWindow", "History"))
+        
+    def open_model_window(self):
+        model_window = QtWidgets.QDialog()
+        ui = mw.Ui_model_window()
+        ui.setupUi(model_window)
+        model_window.exec_()
 
 
 if __name__ == "__main__":

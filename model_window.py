@@ -12,7 +12,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_model_window(object):
-    def setupUi(self, model_window):
+    
+    def setupUi(self):
+        
+        
+        
+        
+        
+        
         model_window.setObjectName("model_window")
         model_window.resize(800, 400)
         self.hyperparameters = QtWidgets.QComboBox(model_window)
@@ -44,7 +51,7 @@ class Ui_model_window(object):
 
         self.retranslateUi(model_window)
         QtCore.QMetaObject.connectSlotsByName(model_window)
-        
+       
     def get_params(self):
         return self.hyper_edit.text()
     

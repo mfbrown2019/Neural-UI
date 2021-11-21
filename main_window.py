@@ -16,6 +16,9 @@ class Ui_MainWindow(object):
     def __init__(self):
         self.items = []
         
+        self.models = [AlexNet.AlexNet(), LeNet.LeNet(), LeNetReg.LeNetReg(), MiniVGGNet.MiniVGGNet(), ResNet.ResNet(), VGGNet16.VGGNet16(), VGGNet19.VGGNet19()]
+        
+        
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1100, 800)

@@ -13,6 +13,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
     def setupUi(self, Form):
+        
+        self.buttons_background = '#5AAAA4'
+        self.buttons_text = '#575366'
+        self.run_background = '#575366'
+        self.run_text = '#5AAAA4'
+        
         Form.setObjectName("Form")
         Form.resize(800, 300)
         self.pushButton = QtWidgets.QPushButton(Form)
@@ -201,7 +207,21 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-
+        self.lineEdit_4.returnPressed.connect(self.set_button_color)
+        self.lineEdit_5.returnPressed.connect(self.set_run_button)
+        
+    def set_run_button(self):
+        self.run_background = self.lineEdit_5.text()
+        self.pushButton_2.setStyleSheet(f"background-color: {self.run_background}; border-radius: 10px;")
+    
+    def set_button_color(self):
+        self.buttons_background = self.lineEdit_4.text()
+        self.pushButton.setStyleSheet(f"background-color: {self.buttons_background}; border-radius: 10px;")
+        self.pushButton_4.setStyleSheet(f"background-color: {self.buttons_background}; border-radius: 10px;")
+        
+    def send_colors(self):
+        return [self.buttons_background, self.buttons_text, self.run_background, self.run_text]
+    
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))

@@ -19,6 +19,10 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         
+        self.buttons_background = '#5AAAA4'
+        self.buttons_text = '#575366'
+        self.run_background = '#575366'
+        self.run_text = '#5AAAA4'
         self.items = []
         
         self.models = [AlexNet.AlexNet(), LeNet.LeNet(), LeNetReg.LeNetReg(), MiniVGGNet.MiniVGGNet(), ResNet.ResNet(), VGGNet16.VGGNet16(), VGGNet19.VGGNet19()]
@@ -74,7 +78,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(50)
         self.data_button.setFont(font)
-        self.data_button.setStyleSheet("background-color: #5AAAA4;\n"
+        self.data_button.setStyleSheet(f"background-color: {self.buttons_background};\n"
 "border-radius: 10px;")
         self.data_button.setObjectName("data_button")
         self.model_button = QtWidgets.QPushButton(self.centralwidget)
@@ -120,7 +124,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(50)
         self.model_button.setFont(font)
-        self.model_button.setStyleSheet("background-color: #5AAAA4;\n"
+        self.model_button.setStyleSheet(f"background-color: {self.buttons_background};\n"
 "border-radius: 10px;")
         self.model_button.setObjectName("model_button")
         self.settings_button = QtWidgets.QPushButton(self.centralwidget)
@@ -166,7 +170,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(50)
         self.settings_button.setFont(font)
-        self.settings_button.setStyleSheet("background-color: #5AAAA4;\n"
+        self.settings_button.setStyleSheet(f"background-color: {self.buttons_background};\n"
 "border-radius: 10px;")
         self.settings_button.setObjectName("settings_button")
         self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
@@ -212,7 +216,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(50)
         self.pushButton_5.setFont(font)
-        self.pushButton_5.setStyleSheet("background-color: #575366;\n"
+        self.pushButton_5.setStyleSheet(f"background-color: {self.run_background};\n"
 "border-radius: 10px;")
         self.pushButton_5.setObjectName("pushButton_5")
         self.history_button = QtWidgets.QPushButton(self.centralwidget)
@@ -258,7 +262,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(50)
         self.history_button.setFont(font)
-        self.history_button.setStyleSheet("background-color: #5AAAA4;\n"
+        self.history_button.setStyleSheet(f"background-color: {self.buttons_background};\n"
 "border-radius: 10px;")
         self.history_button.setObjectName("history_button")
         self.logo = QtWidgets.QLabel(self.centralwidget)
@@ -317,8 +321,13 @@ class Ui_MainWindow(object):
         ui.setupUi(Form)
         Form.show()
         Form.exec_()
-
-
+        self.buttons_background, self.buttons_text, self.run_background, self.run_text = ui.send_colors()
+        self.history_button.setStyleSheet(f"background-color: {self.buttons_background};\n""border-radius: 10px;")
+        self.pushButton_5.setStyleSheet(f"background-color: {self.run_background};\n""border-radius: 10px;")
+        self.settings_button.setStyleSheet(f"background-color: {self.buttons_background};\n""border-radius: 10px;")
+        self.model_button.setStyleSheet(f"background-color: {self.buttons_background};\n""border-radius: 10px;")
+        self.data_button.setStyleSheet(f"background-color: {self.buttons_background};\n""border-radius: 10px;")
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

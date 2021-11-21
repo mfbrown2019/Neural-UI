@@ -17,6 +17,9 @@ from tensorflow.keras.utils import to_categorical
 
 
 class MiniGoogLeNet:
+    def __init__(self):
+        self.name = 'MiniGoogLeNet'
+    
     def convolution_module(x, K, kX, kY, stride, channelsDim, ai, padding="same"):
         # create a CONV -> BN -> RELU sequence
         x = Conv2D(K, (kX, kY), strides = stride, padding = padding)(x)

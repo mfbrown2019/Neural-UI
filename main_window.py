@@ -13,13 +13,17 @@ import VGGNet19 as VGGNet19
 
 
 class Ui_MainWindow(object):
-    def __init__(self):
+
+    def setupUi(self, MainWindow):
+        
         self.items = []
         
         self.models = [AlexNet.AlexNet(), LeNet.LeNet(), LeNetReg.LeNetReg(), MiniVGGNet.MiniVGGNet(), ResNet.ResNet(), VGGNet16.VGGNet16(), VGGNet19.VGGNet19()]
         
         
-    def setupUi(self, MainWindow):
+        
+        
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1100, 800)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -284,7 +288,7 @@ class Ui_MainWindow(object):
     def open_model_window(self):
         model_window = QtWidgets.QDialog()
         ui = mw.Ui_model_window()
-        ui.setupUi(model_window)
+        ui.setupUi(model_window, self.models)
         model_window.exec_()
         self.items.append(ui.get_params())
         print(self.items)

@@ -13,6 +13,8 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.regularizers import l2
 
 class VGGNet19:
+    def __init__(self):
+        self.name = 'VGGNet19'
     def build(height, width, depth, classes, activation_input = 'relu', dropout_input = [.25, .5]):
         model = Sequential(name = 'VGGNet19')
         

@@ -14,6 +14,8 @@ from tensorflow.keras.regularizers import l2
 
 
 class VGGNet16:
+    def __init__(self):
+        self.name = 'VGGNet16'
     def build(height, width, depth, classes, activation_input = 'relu', dropout_input = [.25, .5]):
         model = Sequential(name = 'VGGNet16')
         

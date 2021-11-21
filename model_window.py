@@ -13,10 +13,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_model_window(object):
     
-    def setupUi(self):
+    
+    def setupUi(self, model_window, models):
         
         
-        
+        self.models = models
         
         
         
@@ -51,7 +52,9 @@ class Ui_model_window(object):
 
         self.retranslateUi(model_window)
         QtCore.QMetaObject.connectSlotsByName(model_window)
-       
+        for x in self.models:
+            print(x.name)
+        
     def get_params(self):
         return self.hyper_edit.text()
     

@@ -44,7 +44,10 @@ class Ui_model_window(object):
 
         self.retranslateUi(model_window)
         QtCore.QMetaObject.connectSlotsByName(model_window)
-
+        
+    def get_params(self):
+        return self.hyper_edit.text()
+    
     def retranslateUi(self, model_window):
         _translate = QtCore.QCoreApplication.translate
         model_window.setWindowTitle(_translate("model_window", "Form"))

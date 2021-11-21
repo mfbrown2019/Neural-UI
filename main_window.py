@@ -12,6 +12,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import model_window as mw
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        self.items = []
+        
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1100, 800)
@@ -271,7 +274,7 @@ class Ui_MainWindow(object):
         self.data_button.setText(_translate("MainWindow", "Data"))
         self.model_button.setText(_translate("MainWindow", "Model"))
         self.settings_button.setText(_translate("MainWindow", "Settings"))
-        self.pushButton_5.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton_5.setText(_translate("MainWindow", "RUN"))
         self.history_button.setText(_translate("MainWindow", "History"))
         
     def open_model_window(self):
@@ -279,7 +282,8 @@ class Ui_MainWindow(object):
         ui = mw.Ui_model_window()
         ui.setupUi(model_window)
         model_window.exec_()
-
+        self.items.append(ui.get_params())
+        print(self.items)
 
 if __name__ == "__main__":
     import sys

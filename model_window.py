@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_model_window(object):
     def setupUi(self, model_window, models):
-        
+        self.activation_txts = ["Relu", "elu", "Sigmoid"]
         self.models = models
         
         model_window.setObjectName("model_window")
@@ -24,10 +24,22 @@ class Ui_model_window(object):
         self.hyperparameters.setObjectName("hyperparameters")
         self.model_dropdown = QtWidgets.QComboBox(model_window)
         self.model_dropdown.setGeometry(QtCore.QRect(480, 20, 300, 30))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(14)
+        self.model_dropdown.setFont(font)
+        self.model_dropdown.setEditable(True)
+        for i in self.models:
+            self.model_dropdown.addItem(i.name)
         self.model_dropdown.setObjectName("model_dropdown")
         self.activation_dropdown = QtWidgets.QComboBox(model_window)
         self.activation_dropdown.setGeometry(QtCore.QRect(480, 200, 300, 30))
+        self.activation_dropdown.setFont(font)
+        self.activation_dropdown.setEditable(True)
+        for i in self.activation_txts:
+            self.activation_dropdown.addItem(i)
         self.activation_dropdown.setObjectName("activation_dropdown")
+
         self.parameter_slider = QtWidgets.QSlider(model_window)
         self.parameter_slider.setGeometry(QtCore.QRect(20, 200, 300, 30))
         self.parameter_slider.setOrientation(QtCore.Qt.Horizontal)
@@ -106,8 +118,7 @@ class Ui_model_window(object):
         return self.hyper_edit_2.text()
     def get_dropout(self):
         return self.doubleSpinBox.text(), self.doubleSpinBox_2.text(), self.doubleSpinBox_3.text(), self.doubleSpinBox_4.text()
-    
-    
+
 
     def retranslateUi(self, model_window):
         _translate = QtCore.QCoreApplication.translate

@@ -2,6 +2,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import model_window as mw
+import settings_window as sw
 import data_window as dw
 import AlexNet as AlexNet
 import LeNet as LeNet
@@ -278,6 +279,7 @@ class Ui_MainWindow(object):
         
         self.model_button.clicked.connect(self.open_model_window)
         self.data_button.clicked.connect(self.open_data_window)
+        self.settings_button.clicked.connect(self.open_settings_window)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -308,6 +310,14 @@ class Ui_MainWindow(object):
         
         self.items.append(ui.get_path())
         print(self.items)
+    
+    def open_settings_window(self):
+        Form = QtWidgets.QDialog()
+        ui = sw.Ui_Form()
+        ui.setupUi(Form)
+        Form.show()
+        Form.exec_()
+
 
 if __name__ == "__main__":
     import sys

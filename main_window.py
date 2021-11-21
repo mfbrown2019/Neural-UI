@@ -3,6 +3,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import model_window as mw
 import settings_window as sw
+import SimpleImagePreprocessor as sip
 import data_window as dw
 import AlexNet as AlexNet
 import LeNet as LeNet
@@ -13,6 +14,49 @@ import ResNet as ResNet
 import VGGNet16 as VGGNet16
 import VGGNet19 as VGGNet19
 import hyper_classes as hc
+
+
+import tensorflow as tf
+from tensorflow.python.client import device_lib
+import cv2
+import os
+import numpy as np
+from imutils import paths
+from random import randint
+
+# import the necessary packages
+from sklearn.preprocessing import LabelBinarizer
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.callbacks import LearningRateScheduler
+
+from sklearn.metrics import classification_report
+import matplotlib.pyplot as plt
+
+from tensorflow.keras.layers import BatchNormalization
+from tensorflow.keras.layers import Conv2D
+from tensorflow.keras.layers import AveragePooling2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import Dropout
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import concatenate
+from tensorflow.keras.layers import add
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Activation
+from tensorflow.keras.regularizers import l1_l2
+
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+from tensorflow.keras.optimizers import SGD
+from tensorflow.keras.utils import to_categorical
+
+from tensorflow.keras.layers import InputLayer
 
 
 class Ui_MainWindow(object):
@@ -284,6 +328,7 @@ class Ui_MainWindow(object):
         self.model_button.clicked.connect(self.open_model_window)
         self.data_button.clicked.connect(self.open_data_window)
         self.settings_button.clicked.connect(self.open_settings_window)
+        self.pushButton_5.clicked.connect(self.run_model)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -294,16 +339,55 @@ class Ui_MainWindow(object):
         self.pushButton_5.setText(_translate("MainWindow", "RUN"))
         self.history_button.setText(_translate("MainWindow", "History"))
         
+    def preprocess(self):
+
+        imagePaths = list(paths.list_images(self.path))
+
+        # chose the size for the image
+        preprocessor = sip.SimpleImagePreprocessor(int(self.sizex), int(self.sizey))
+
+        # initialize the data loader
+        dataLoader = sip.SimpleImageDatasetLoader(1, preprocessors = [preprocessor.resize])
+
+        # load the data into lists
+        self.trainX, self.trainY = dataLoader.load(imagePaths, verbose = 100)
+        
+        
+        what = []
+
+        for i, label in enumerate(self.trainY):
+            if label == 'rock':
+                what.append(0)
+            if label == 'paper':
+                what.append(1)
+            if label == 'scissors':
+                what.append(2)
+
+        self.trainY = what
+        self.trainX = self.trainX.astype('float32')/255.0
+        self.trainY = to_categorical(self.trainY, int(self.num_classes))
+        
+        self.trainX, self.testX, self.trainY, self.testY = train_test_split(self.trainX, self.trainY, test_size = .2)
+        
+    def run_model(self):
+        if self.rgb:
+            self.depth = 3
+        else:
+            self.depth = 1
+            
+        model = LeNetReg.LeNetReg.build(int(self.sizex), int(self.sizey), self.depth, int(self.num_classes), lam1 = int(self.hyper), lam2 = 0, dropout = self.dropout, activation_input = self.activation_function)
+        model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
+
+        H = model.fit(self.trainX, self.trainY, validation_split = 0.20, batch_size = 128, epochs = int(self.epochs), verbose = 1)
+        
     def open_model_window(self):
         model_window = QtWidgets.QDialog()
         ui = mw.Ui_model_window()
-        ui.setupUi(model_window, self.models)
+        ui.setupUi(model_window, self.models, self.buttons_background)
         model_window.exec_()
         
-        self.items.append(ui.get_epocs())
-        self.items.append(ui.get_line_edit())
-        self.items.append(ui.get_dropout())
-        print(self.items)
+        self.dropout, self.epochs, self.hyper, self.hypername, self.activation_function, self.model_name = ui.send_everything()
+        print(self.dropout, self.epochs, self.hyper, self.hypername, self.activation_function, self.model_name)
         
     def open_data_window(self):
         Form = QtWidgets.QDialog()
@@ -312,9 +396,10 @@ class Ui_MainWindow(object):
         Form.show()
         Form.exec_()
         
-        self.items.append(ui.get_path())
-        print(self.items)
-    
+        self.path, self.sizex, self.sizey, self.dataaug, self.num_classes, self.rgb = ui.send_path_data()
+        print(self.path, self.sizex, self.sizey, self.dataaug)
+        self.preprocess()
+        
     def open_settings_window(self):
         Form = QtWidgets.QDialog()
         ui = sw.Ui_Form()

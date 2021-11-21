@@ -12,8 +12,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_model_window(object):
-    def setupUi(self, model_window, models):
-        self.activation_txts = ["Relu", "elu", "Sigmoid"]
+    def setupUi(self, model_window, models, back):
+        self.activation_txts = ["relu", "elu", "sigmoid"]
         self.models = models
         
         model_window.setObjectName("model_window")
@@ -107,6 +107,8 @@ class Ui_model_window(object):
         self.parameter_slider_2.setMaximum(500)
         self.parameter_slider_2.valueChanged.connect(self.set_epoch_label)
         self.parameter_slider.valueChanged.connect(self.set_hyper_label)
+        self.close_button.setStyleSheet(f"background-color: {back}; border-radius: 10px;")
+        self.submit_button.setStyleSheet(f"background-color: {back}; border-radius: 10px;")
         
     def set_hyper_label(self):
         self.hyper_edit.setText(str(self.parameter_slider.value()))
@@ -117,8 +119,10 @@ class Ui_model_window(object):
     def get_epocs(self):
         return self.hyper_edit_2.text()
     def get_dropout(self):
-        return self.doubleSpinBox.text(), self.doubleSpinBox_2.text(), self.doubleSpinBox_3.text(), self.doubleSpinBox_4.text()
+        return [float(self.doubleSpinBox.text()), float(self.doubleSpinBox_2.text()), float(self.doubleSpinBox_3.text()), float(self.doubleSpinBox_4.text())]
 
+    def send_everything(self):
+        return [self.get_dropout(), self.get_epocs(), self.hyper_edit.text(), self.hyperparameters.currentText(), self.activation_dropdown.currentText(), self.model_dropdown.currentText()]
 
     def retranslateUi(self, model_window):
         _translate = QtCore.QCoreApplication.translate

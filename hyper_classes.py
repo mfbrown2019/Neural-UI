@@ -28,7 +28,18 @@ class Momentum:
         self.name = 'Momentum'
         self.min = 0
         self.max = 1
-
+        
+class Regularization:
+    def __init__(self):
+        self.name = 'Regularization'
+        self.min = 0
+        self.max = 10
+        
+class Epsilon:
+    def __init__(self):
+        self.name = 'Epsilon'
+        self.min = 0
+        self.max = 10
 
 
 

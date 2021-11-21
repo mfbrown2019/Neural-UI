@@ -13,6 +13,7 @@ from tensorflow.keras.layers import MaxPooling2D
 class MiniVGGNet:
     def __init__(self):
         self.name = 'MiniVGGNet'
+        self.hypers = ['']
     def build(height, width, depth, classes, activation_input = 'relu', dropout_input = [.25]):
         model = Sequential(name = 'MiniVGGNet')
         

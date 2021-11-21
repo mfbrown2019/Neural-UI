@@ -16,6 +16,7 @@ from tensorflow.keras.regularizers import l2
 class AlexNet:
     def __init__(self):
         self.name = 'AlexNet'
+        self.hypers = ['L2']
     def build(height, width, depth, classes, lambda2 = 0.0002, activation_input = 'relu', drouput_input = [.25, .5]):
         model = Sequential(name = 'AlexNet')
         

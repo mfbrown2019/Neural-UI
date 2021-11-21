@@ -308,7 +308,7 @@ class Ui_MainWindow(object):
     def open_data_window(self):
         Form = QtWidgets.QDialog()
         ui = dw.Ui_Form()
-        ui.setupUi(Form)
+        ui.setupUi(Form, self.buttons_background)
         Form.show()
         Form.exec_()
         

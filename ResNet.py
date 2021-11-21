@@ -23,6 +23,7 @@ from tensorflow.keras.utils import to_categorical
 class ResNet:
     def __init__(self):
         self.name = 'ResNet'
+        self.hypers = ['Regularization', 'Epsilon', 'Momentum']
     def residual_module(data, K, stride, channelsDim, ai = 'relu', reduce = False, reg = 0.0001, bnEpsilon = 0.00002, bnMomentum = 0.9):
         shortcut = data
         

@@ -12,7 +12,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Form(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form, back):
+        
         Form.setObjectName("Form")
         Form.resize(800, 300)
         palette = QtGui.QPalette()
@@ -107,7 +108,7 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(24)
         self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: #5AAAA4; border-radius: 10px;")
+        self.pushButton.setStyleSheet(f"background-color: {back}; border-radius: 10px;")
         self.pushButton.setObjectName("pushButton")
 
         self.retranslateUi(Form)

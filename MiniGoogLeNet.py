@@ -19,6 +19,7 @@ from tensorflow.keras.utils import to_categorical
 class MiniGoogLeNet:
     def __init__(self):
         self.name = 'MiniGoogLeNet'
+        self.hypers = ['']
     
     def convolution_module(x, K, kX, kY, stride, channelsDim, ai, padding="same"):
         # create a CONV -> BN -> RELU sequence

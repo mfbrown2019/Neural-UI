@@ -11,6 +11,7 @@ from tensorflow.keras.regularizers import l1_l2
 class LeNetReg:
     def __init__(self):
         self.name = 'LeNetReg'
+        self.hypers = ['L1','L2']
     # create the architecture
     def build(height, width, depth, classes, lam1 = 0, lam2 = 0, dropout = [0, 0, 0, 0.5], activation_input = 'relu'):
         # create a feedforward neural net

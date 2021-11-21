@@ -8,6 +8,7 @@ from tensorflow.keras.layers import Flatten
 class LeNet:
     def __init__(self):
         self.name = 'LeNet'
+        self.hypers = ['']
     # create the architecture
     def build(height, width, depth, classes, activation_input = 'relu'):
         # create a feedforward neural net

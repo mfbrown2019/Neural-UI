@@ -2,6 +2,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import model_window as mw
+import settings_window as sw
+import data_window as dw
 import AlexNet as AlexNet
 import LeNet as LeNet
 import LeNetReg as LeNetReg
@@ -10,6 +12,7 @@ import MiniVGGNet as MiniVGGNet
 import ResNet as ResNet
 import VGGNet16 as VGGNet16
 import VGGNet19 as VGGNet19
+import hyper_classes as hc
 
 
 class Ui_MainWindow(object):
@@ -275,6 +278,8 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
         self.model_button.clicked.connect(self.open_model_window)
+        self.data_button.clicked.connect(self.open_data_window)
+        self.settings_button.clicked.connect(self.open_settings_window)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -290,10 +295,29 @@ class Ui_MainWindow(object):
         ui = mw.Ui_model_window()
         ui.setupUi(model_window, self.models)
         model_window.exec_()
+        
         self.items.append(ui.get_epocs())
         self.items.append(ui.get_line_edit())
         self.items.append(ui.get_dropout())
         print(self.items)
+        
+    def open_data_window(self):
+        Form = QtWidgets.QDialog()
+        ui = dw.Ui_Form()
+        ui.setupUi(Form)
+        Form.show()
+        Form.exec_()
+        
+        self.items.append(ui.get_path())
+        print(self.items)
+    
+    def open_settings_window(self):
+        Form = QtWidgets.QDialog()
+        ui = sw.Ui_Form()
+        ui.setupUi(Form)
+        Form.show()
+        Form.exec_()
+
 
 if __name__ == "__main__":
     import sys

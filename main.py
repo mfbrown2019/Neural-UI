@@ -3,11 +3,15 @@ from PyQt5.QtWidgets import QHeaderView
 
 import sys
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        self.x = 800
+        self.y = 600
         self.cat_list = []
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(self.x, self.y)
+        print(self.x, self.y)
         MainWindow.setWindowTitle("Expense Report")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")

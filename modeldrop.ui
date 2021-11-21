@@ -49,37 +49,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QSlider" name="parameter_slider">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>300</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="hyper_edit">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>250</y>
-     <width>300</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>24</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>63463</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="submit_button">
    <property name="geometry">
     <rect>
@@ -106,52 +75,19 @@
     <string>Close</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="hyper_edit_2">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>280</y>
-     <width>205</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>24</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>63463</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>280</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>24</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Epochs: </string>
-   </property>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>330</y>
-     <width>304</width>
+     <x>22</x>
+     <y>200</y>
+     <width>291</width>
      <height>31</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
     </item>
@@ -165,37 +101,6 @@
      <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>290</y>
-     <width>100</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>28</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Dropout</string>
-   </property>
-  </widget>
-  <widget class="QSlider" name="parameter_slider_2">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>240</y>
-     <width>291</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
   </widget>
  </widget>
  <resources/>

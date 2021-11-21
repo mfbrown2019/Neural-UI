@@ -290,7 +290,9 @@ class Ui_MainWindow(object):
         ui = mw.Ui_model_window()
         ui.setupUi(model_window, self.models)
         model_window.exec_()
-        self.items.append(ui.get_params())
+        self.items.append(ui.get_epocs())
+        self.items.append(ui.get_line_edit())
+        self.items.append(ui.get_dropout())
         print(self.items)
 
 if __name__ == "__main__":

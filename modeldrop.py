@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'model.ui'
+# Form implementation generated from reading ui file 'modeldrop.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -12,10 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_model_window(object):
-    def setupUi(self, model_window, models):
-        
-        self.models = models
-        
+    def setupUi(self, model_window):
         model_window.setObjectName("model_window")
         model_window.resize(800, 400)
         self.hyperparameters = QtWidgets.QComboBox(model_window)
@@ -28,36 +25,14 @@ class Ui_model_window(object):
         self.activation_dropdown = QtWidgets.QComboBox(model_window)
         self.activation_dropdown.setGeometry(QtCore.QRect(480, 200, 300, 30))
         self.activation_dropdown.setObjectName("activation_dropdown")
-        self.parameter_slider = QtWidgets.QSlider(model_window)
-        self.parameter_slider.setGeometry(QtCore.QRect(20, 200, 300, 30))
-        self.parameter_slider.setOrientation(QtCore.Qt.Horizontal)
-        self.parameter_slider.setObjectName("parameter_slider")
-        self.hyper_edit = QtWidgets.QLineEdit(model_window)
-        self.hyper_edit.setGeometry(QtCore.QRect(20, 250, 300, 30))
-        font = QtGui.QFont()
-        font.setPointSize(24)
-        self.hyper_edit.setFont(font)
-        self.hyper_edit.setObjectName("hyper_edit")
         self.submit_button = QtWidgets.QPushButton(model_window)
         self.submit_button.setGeometry(QtCore.QRect(580, 330, 100, 50))
         self.submit_button.setObjectName("submit_button")
         self.close_button = QtWidgets.QPushButton(model_window)
         self.close_button.setGeometry(QtCore.QRect(680, 330, 100, 50))
         self.close_button.setObjectName("close_button")
-        self.hyper_edit_2 = QtWidgets.QLineEdit(model_window)
-        self.hyper_edit_2.setGeometry(QtCore.QRect(570, 280, 205, 30))
-        font = QtGui.QFont()
-        font.setPointSize(24)
-        self.hyper_edit_2.setFont(font)
-        self.hyper_edit_2.setObjectName("hyper_edit_2")
-        self.label = QtWidgets.QLabel(model_window)
-        self.label.setGeometry(QtCore.QRect(480, 280, 91, 31))
-        font = QtGui.QFont()
-        font.setPointSize(24)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
         self.horizontalLayoutWidget = QtWidgets.QWidget(model_window)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 330, 304, 31))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(22, 200, 291, 31))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -74,48 +49,22 @@ class Ui_model_window(object):
         self.doubleSpinBox_4 = QtWidgets.QDoubleSpinBox(self.horizontalLayoutWidget)
         self.doubleSpinBox_4.setObjectName("doubleSpinBox_4")
         self.horizontalLayout.addWidget(self.doubleSpinBox_4)
-        self.label_2 = QtWidgets.QLabel(model_window)
-        self.label_2.setGeometry(QtCore.QRect(120, 290, 100, 31))
-        font = QtGui.QFont()
-        font.setPointSize(28)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
-        self.parameter_slider_2 = QtWidgets.QSlider(model_window)
-        self.parameter_slider_2.setGeometry(QtCore.QRect(480, 240, 291, 30))
-        self.parameter_slider_2.setOrientation(QtCore.Qt.Horizontal)
-        self.parameter_slider_2.setObjectName("parameter_slider_2")
 
         self.retranslateUi(model_window)
         QtCore.QMetaObject.connectSlotsByName(model_window)
-        
-        self.parameter_slider.setMinimum(0)
-        self.parameter_slider.setMaximum(10)
-        
-        self.parameter_slider_2.setMinimum(0)
-        self.parameter_slider_2.setMaximum(500)
-        self.parameter_slider_2.valueChanged.connect(self.set_epoch_label)
-        self.parameter_slider.valueChanged.connect(self.set_hyper_label)
-        
-    def set_hyper_label(self):
-        self.hyper_edit.setText(str(self.parameter_slider.value()))
-    def set_epoch_label(self):
-        self.hyper_edit_2.setText(str(self.parameter_slider_2.value()))
-    def get_line_edit(self):
-        return self.hyper_edit.text()
-    def get_epocs(self):
-        return self.hyper_edit_2.text()
-    def get_dropout(self):
-        return self.doubleSpinBox.text(), self.doubleSpinBox_2.text(), self.doubleSpinBox_3.text(), self.doubleSpinBox_4.text()
-    
-    
 
     def retranslateUi(self, model_window):
         _translate = QtCore.QCoreApplication.translate
         model_window.setWindowTitle(_translate("model_window", "Form"))
-        self.hyper_edit.setText(_translate("model_window", "0"))
         self.submit_button.setText(_translate("model_window", "Submit"))
         self.close_button.setText(_translate("model_window", "Close"))
-        self.hyper_edit_2.setText(_translate("model_window", "0"))
-        self.label.setText(_translate("model_window", "Epochs: "))
-        self.label_2.setText(_translate("model_window", "Dropout"))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    model_window = QtWidgets.QWidget()
+    ui = Ui_model_window()
+    ui.setupUi(model_window)
+    model_window.show()
+    sys.exit(app.exec_())

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'search_ui.ui'
+# Form implementation generated from reading ui file 'title_notes.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,22 +14,32 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(1100, 800)
-        self.search_label = QtWidgets.QLabel(Form)
-        self.search_label.setGeometry(QtCore.QRect(20, 50, 131, 31))
+        Form.resize(600, 300)
+        font = QtGui.QFont()
+        font.setKerning(False)
+        Form.setFont(font)
+        self.title_edit = QtWidgets.QLineEdit(Form)
+        self.title_edit.setGeometry(QtCore.QRect(20, 20, 560, 50))
         font = QtGui.QFont()
         font.setPointSize(40)
-        self.search_label.setFont(font)
-        self.search_label.setObjectName("search_label")
-        self.filter_edit = QtWidgets.QLineEdit(Form)
-        self.filter_edit.setGeometry(QtCore.QRect(160, 40, 550, 50))
+        self.title_edit.setFont(font)
+        self.title_edit.setText("")
+        self.title_edit.setObjectName("title_edit")
+        self.notes_edit = QtWidgets.QLineEdit(Form)
+        self.notes_edit.setGeometry(QtCore.QRect(20, 90, 560, 50))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.notes_edit.sizePolicy().hasHeightForWidth())
+        self.notes_edit.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(40)
-        self.filter_edit.setFont(font)
-        self.filter_edit.setText("")
-        self.filter_edit.setObjectName("filter_edit")
-        self.advanced_button = QtWidgets.QPushButton(Form)
-        self.advanced_button.setGeometry(QtCore.QRect(730, 40, 350, 50))
+        self.notes_edit.setFont(font)
+        self.notes_edit.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.notes_edit.setText("")
+        self.notes_edit.setObjectName("notes_edit")
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(380, 180, 200, 100))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(90, 170, 164))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -67,29 +77,22 @@ class Ui_Form(object):
         brush = QtGui.QBrush(QtGui.QColor(90, 170, 164))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.advanced_button.setPalette(palette)
+        self.pushButton.setPalette(palette)
         font = QtGui.QFont()
         font.setPointSize(40)
-        self.advanced_button.setFont(font)
-        self.advanced_button.setStyleSheet("background-color: #5AAAA4; border-radius: 10px;\n"
-"")
-        self.advanced_button.setObjectName("advanced_button")
-        self.scrollArea = QtWidgets.QScrollArea(Form)
-        self.scrollArea.setGeometry(QtCore.QRect(20, 100, 1060, 680))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1058, 678))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.table_widget = QtWidgets.QTableWidget(self.scrollAreaWidgetContents)
-        self.table_widget.setGeometry(QtCore.QRect(0, 0, 1060, 680))
-        self.table_widget.setObjectName("table_widget")
-        self.table_widget.setColumnCount(16)
-        self.table_widget.setRowCount(10)
-        self.table_widget.setHorizontalHeaderLabels(['ID', 'Title', 'Model', 'Activation','L1', 'L2', 'Dropout', 'Momentum', 'Learning Rate', 
-                                                    'Epochs', 'Note', 'Training Photo', 'Heatmap', 'Train Loss', 'Train Accuracy', 'Date'])
-        
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("background-color: #5AAAA4; border-radius: 10px;")
+        self.pushButton.setObjectName("pushButton")
+        self.save_model = QtWidgets.QCheckBox(Form)
+        self.save_model.setGeometry(QtCore.QRect(20, 215, 221, 31))
+        font = QtGui.QFont()
+        font.setPointSize(40)
+        font.setKerning(False)
+        self.save_model.setFont(font)
+        self.save_model.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.save_model.setChecked(False)
+        self.save_model.setTristate(False)
+        self.save_model.setObjectName("save_model")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -97,6 +100,10 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.search_label.setText(_translate("Form", "Search:"))
-        self.filter_edit.setPlaceholderText(_translate("Form", "Filter"))
-        self.advanced_button.setText(_translate("Form", "Advanced Search"))
+        self.title_edit.setPlaceholderText(_translate("Form", "Enter Title"))
+        self.notes_edit.setPlaceholderText(_translate("Form", "Add Additional Notes"))
+        self.pushButton.setText(_translate("Form", "RUN"))
+        self.save_model.setText(_translate("Form", "Save Model"))
+
+
+

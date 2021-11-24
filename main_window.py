@@ -4,6 +4,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import model_window as mw
 import search_analysis as sa
 import settings_window as sw
+import Model_Class as me
+import title_notes as tn
+import DB_Manager as DB
 import SimpleImagePreprocessor as sip
 import data_window as dw
 import AlexNet as AlexNet
@@ -331,7 +334,17 @@ class Ui_MainWindow(object):
         self.settings_button.clicked.connect(self.open_settings_window)
         self.pushButton_5.clicked.connect(self.run_model)
         self.history_button.clicked.connect(self.open_history_window)
-
+        
+        self.rgb = False
+        self.sizex = -1
+        
+        self.database = DB.DBManager()
+        self.database.close_database()
+        
+        
+        
+        
+        
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -372,6 +385,15 @@ class Ui_MainWindow(object):
         self.trainX, self.testX, self.trainY, self.testY = train_test_split(self.trainX, self.trainY, test_size = .2)
         
     def run_model(self):
+        
+        Form = QtWidgets.QDialog()
+        ui = tn.Ui_Form()
+        ui.setupUi(Form)
+        Form.show()
+        Form.exec_()
+        
+        if self.sizex == -1:
+            return
         if self.rgb:
             self.depth = 3
         else:

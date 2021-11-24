@@ -2,6 +2,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import model_window as mw
+import search_analysis as sa
 import settings_window as sw
 import SimpleImagePreprocessor as sip
 import data_window as dw
@@ -329,6 +330,7 @@ class Ui_MainWindow(object):
         self.data_button.clicked.connect(self.open_data_window)
         self.settings_button.clicked.connect(self.open_settings_window)
         self.pushButton_5.clicked.connect(self.run_model)
+        self.history_button.clicked.connect(self.open_history_window)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -413,6 +415,14 @@ class Ui_MainWindow(object):
         self.model_button.setStyleSheet(f"background-color: {self.buttons_background};\n""border-radius: 10px;")
         self.data_button.setStyleSheet(f"background-color: {self.buttons_background};\n""border-radius: 10px;")
         
+    def open_history_window(self):
+  
+        Form = QtWidgets.QDialog()
+        ui = sa.Ui_Form()
+        ui.setupUi(Form)
+        Form.show()
+        Form.exec_()
+            
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

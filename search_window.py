@@ -9,10 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import *
 
 class Ui_Form(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form, base):
+        self.base = base
         Form.setObjectName("Form")
         Form.resize(1100, 800)
         self.search_label = QtWidgets.QLabel(Form)
@@ -84,15 +85,40 @@ class Ui_Form(object):
         self.table_widget = QtWidgets.QTableWidget(self.scrollAreaWidgetContents)
         self.table_widget.setGeometry(QtCore.QRect(0, 0, 1060, 680))
         self.table_widget.setObjectName("table_widget")
-        self.table_widget.setColumnCount(16)
-        self.table_widget.setRowCount(10)
+        self.table_widget.setColumnCount(14)
+        self.table_widget.setRowCount(50)
         self.table_widget.setHorizontalHeaderLabels(['ID', 'Title', 'Model', 'Activation','L1', 'L2', 'Dropout', 'Momentum', 'Learning Rate', 
-                                                    'Epochs', 'Note', 'Training Photo', 'Heatmap', 'Train Loss', 'Train Accuracy', 'Date'])
+                                                    'Epochs', 'Note', 'Train Validation', 'Train Accuracy', 'Date'])
         
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.filter_edit.returnPressed.connect(self.filter_tabel)
+        header = self.table_widget.horizontalHeader()       
+        for i in range(14):
+            header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        
+    def filter_tabel(self):
+        
+        user_input = self.filter_edit.text()
+        sql_command = f"SELECT * FROM History"
+        data = self.base.cursor.execute(sql_command)
+        # For every person in the search add tehm to the screen
+        for i, d in enumerate(data):
+            print(d)
+            for j, item in enumerate(d):
+                self.table_widget.setItem(i, j, QTableWidgetItem(str(item)))
+                # if j == 1:
+                #     self.table_widget.setItem(i, 2, QTableWidgetItem(str(item)))
+                # if j == 2:
+                #     self.table_widget.setItem(i, 3, QTableWidgetItem(str(item)))
+                # if j == 3:
+                #     self.table_widget.setItem(i, 5, QTableWidgetItem(str(item)))
+                # if j == 4:
+                #     self.table_widget.setItem(i, 4, QTableWidgetItem(str(item)))
+                # if j == 5:
+                #     self.table_widget.setItem(i, 0, QTableWidgetItem(str(item)))
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

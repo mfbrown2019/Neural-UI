@@ -12,7 +12,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import search_window as sw
 
 class Ui_Form(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form, base):
+        self.base = base
         Form.setObjectName("Form")
         Form.resize(800, 400)
         self.pushButton = QtWidgets.QPushButton(Form)
@@ -120,7 +121,7 @@ class Ui_Form(object):
     def open_search_window(self):
         Form = QtWidgets.QDialog()
         ui = sw.Ui_Form()
-        ui.setupUi(Form)
+        ui.setupUi(Form, self.base)
         Form.show()
         Form.exec_()
 

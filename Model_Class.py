@@ -3,11 +3,10 @@ class ModelEntry():
     # int to hold the student ids
     model_id = 1
     
-    def __init__(self, title, model, activation, L1, L2, dropout, momentum, alpha, 
-                 epochs, note, training_photo, heatmap, train_loss, train_accuracy, date):
+    def __init__(self, model, activation, L1, L2, dropout, momentum, alpha, 
+                 epochs, trainvalacc, train_accuracy):
         # Format the inital variabls
         ModelEntry.student_id += 1
-        self.title = title
         self.model = model
         self.activation = activation
         self.L1 = L1
@@ -16,10 +15,6 @@ class ModelEntry():
         self.momentum = momentum
         self.alpha = alpha
         self.epochs = epochs
-        self.note = note
-        self.training_photo = training_photo
-        self.heatmap = heatmap
-        self.train_loss = train_loss
+        self.trainvalacc = trainvalacc
         self.train_accuracy = train_accuracy
-        self.date = date
         

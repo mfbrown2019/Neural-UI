@@ -6,6 +6,7 @@ import search_analysis as sa
 import settings_window as sw
 import Model_Class as me
 import title_notes as tn
+import plat_graphs as pg
 import DB_Manager as DB
 import SimpleImagePreprocessor as sip
 import data_window as dw
@@ -18,6 +19,9 @@ import ResNet as ResNet
 import VGGNet16 as VGGNet16
 import VGGNet19 as VGGNet19
 import hyper_classes as hc
+
+from datetime import date
+
 
 
 import tensorflow as tf
@@ -75,7 +79,19 @@ class Ui_MainWindow(object):
         
         self.models = [AlexNet.AlexNet(), LeNet.LeNet(), LeNetReg.LeNetReg(), MiniVGGNet.MiniVGGNet(), ResNet.ResNet(), VGGNet16.VGGNet16(), VGGNet19.VGGNet19()]
         
-        
+        self.title = ''
+        self.model = ''
+        self.activation_function = ''
+        self.l1 = ''
+        self.l2 = ''
+        self.dropout = []
+        self.momentum = 0
+        self.alpha = 0
+        self.epochs = 0
+        self.note = ''
+        self.trainvalacc = ''
+        self.trainacc = ''
+        self.date = ''
         
         
         
@@ -339,7 +355,7 @@ class Ui_MainWindow(object):
         self.sizex = -1
         
         self.database = DB.DBManager()
-        self.database.close_database()
+        
         
         
         
@@ -367,7 +383,7 @@ class Ui_MainWindow(object):
         # load the data into lists
         self.trainX, self.trainY = dataLoader.load(imagePaths, verbose = 100)
         
-        
+         
         what = []
 
         for i, label in enumerate(self.trainY):
@@ -398,11 +414,26 @@ class Ui_MainWindow(object):
             self.depth = 3
         else:
             self.depth = 1
+    
+        my_callbacks = [
+            pg.PlotGrpahs()
+        ]
             
         model = LeNetReg.LeNetReg.build(int(self.sizex), int(self.sizey), self.depth, int(self.num_classes), lam1 = int(self.hyper), lam2 = 0, dropout = self.dropout, activation_input = self.activation_function)
         model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
 
-        H = model.fit(self.trainX, self.trainY, validation_split = 0.20, batch_size = 128, epochs = int(self.epochs), verbose = 1)
+        H = model.fit(self.trainX, self.trainY, validation_split = 0.20, batch_size = 128, epochs = int(self.epochs), verbose = 1, callbacks=my_callbacks)
+        
+        title, note = ui.enter_into_database()
+        temp = ''
+        for x in self.dropout:
+            temp += str(x) + '  '
+            
+        data = (0, title, self.model_name, self.activation_function, self.l1, self.l2, temp, self.momentum, 
+                self.alpha, self.epochs, note, self.trainvalacc, self.trainacc, str(date.today()))
+            # Insert into the database
+        self.database.cursor.execute('INSERT INTO History VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)', data)
+        self.database.connection.commit()
         
     def open_model_window(self):
         model_window = QtWidgets.QDialog()
@@ -441,10 +472,12 @@ class Ui_MainWindow(object):
   
         Form = QtWidgets.QDialog()
         ui = sa.Ui_Form()
-        ui.setupUi(Form)
+        ui.setupUi(Form, self.database)
         Form.show()
         Form.exec_()
-            
+
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

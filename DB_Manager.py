@@ -18,9 +18,7 @@ class DBManager():
                                         Alpha FLOAT,
                                         Epochs INTEGER,
                                         Note VARCHAR(500),
-                                        TrainingPhoto VARCHAR(100),
-                                        Heatmap VARCHAR(100),
-                                        TrainingLoss VARCHAR(100),
+                                        TrainingValAccuracy VARCHAR(100),
                                         TrainingAccuracy VARCHAR(100),
                                         Date DATE
                                     ); """

@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Form(object):
+    
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(600, 300)
@@ -96,7 +97,11 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-
+        
+        
+    def enter_into_database(self):
+        return self.title_edit.text(), self.notes_edit.text()
+        
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
